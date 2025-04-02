@@ -41,6 +41,7 @@ set -U fish_greeting "
 # aliases
 alias ll='ls -la'
 alias gs='git status'
+alias gd='git diff'
 
 alias uni='cd ~/javie/uni/4'
 alias downloads='cd ~/Downloads'
@@ -56,13 +57,14 @@ alias mcp='cd ~/prog/projects/mcp-servers'
 alias pd='~/copy_token.sh'
 alias mariadb_pd='~/copy_mariadb_root.sh'
 
-alias venv='source ./venv/bin/activate'
+alias venv='source ./venv/bin/activate.fish'
 alias mysql_root='sudo mysql -u root -p'
 
-alias zshrc='nvim ~/.zshrc'
-alias initnvim='nvim ~/.config/nvim/init.vim'
+alias fishrc='nvim ~/.config/fish/config.fish'
 
 alias mvnwrun='./mvnw spring-boot:run'
+alias mvnwclean='./mvnw clean install'
+
 alias runserver='python ./manage.py runserver'
 alias migrate='python ./manage.py migrate'
 alias makemigrations='python ./manage.py makemigrations'
@@ -72,14 +74,21 @@ alias fakecount_venv='source ./../.venv/bin/activate'
 
 alias umlet='java -jar ~/javie/Umlet/umlet.jar'
 alias knime='~/Downloads/knime_5.4.1/knime'
+alias cursor='~/Downloads/Cursor-0.47.9-x86_64.AppImage'
 
 alias pinga='ping -c 1 8.8.8.8'
 
 alias zen="~/Downloads/zen-x86_64.AppImage"
 alias vim="nvim"
 
-alias "initlua"="cd ~/.config/nvim";
+alias initlua="cd ~/.config/nvim";
+alias tkill='tmux kill-session -t';
+alias mongo='cd ~/prog/mongo-sharded';
 
 export EDITOR=nvim
 export VISUAL=nvim
 
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
