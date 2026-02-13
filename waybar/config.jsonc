@@ -22,14 +22,14 @@
     ],
 
     "modules-right": [
-        "battery",
-        "pulseaudio",
-        "pulseaudio#microphone",
         "cpu",
         "memory",
         "disk",
         "custom/updates",
+        "pulseaudio",
+        "pulseaudio#microphone",
         "network",
+        "battery",
         "custom/lock_screen",
         "custom/power"
     ],
@@ -104,7 +104,7 @@
         "format-alt-click": "click-right",
         "format-alt": "󰋊 {percentage_used}%",
         "tooltip": true,
-        "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
+        "tooltip-format": "SSD - {used} used out of {total} on {path} ({percentage_used}%)",
         "states": {
             "warning": 85,
             "critical": 90
@@ -119,18 +119,6 @@
         "critical-threshold": 70,
         "format-critical": " {temperatureC}°C",
 },
-    "battery": {
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt-click": "click-right",
-        "format-alt": "{icon} {capacity}%",
-        "states": {
-            "warning": 20,
-            "critical": 10
-        },
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-    },
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-muted": " {volume}%",
@@ -183,15 +171,30 @@
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
-
+    "battery": {
+        "format": "{icon}",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "tooltip": true,
+        "tooltip-format": "{capacity}%",
+        "format-alt-click": "click-right",
+        "format-alt": "{icon} {capacity}%",
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "format-icons": [
+            "󰂎", "󰁺", "󰁻", "󰁼", "󰁽",
+            "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
+        ]
+    },
     "clock": {
-        "timezone": "Asia/Tehran",
-        "format": "{: %H:%M}",
+        "timezone": "Europe/Madrid",
+        // "format": "{ %H:%M}",
         "tooltip": true,
         "on-click": "setbg",
-        "tooltip-format": "{: %A, %B %e %Y}"
+        "tooltip-format": " %A, %B %e %Y"
     },
-
     "custom/khorshididate": { 
         "tooltip" : true,
         "format": " {}",

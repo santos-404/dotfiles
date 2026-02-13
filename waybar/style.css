@@ -154,6 +154,15 @@ tooltip label{
     margin: 2px 0px 2px 0px;
 }
 
+#cpu {
+    border-radius: 5px 0px 0px 5px;
+}
+
+#network {
+    border-radius: 0px 5px 5px 0px;
+    margin: 2px 35px 2px 0px;
+}
+
 #disk.critical,
 #temperature.critical  {
     background-color: @critical;

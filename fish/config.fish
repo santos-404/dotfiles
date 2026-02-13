@@ -7,8 +7,8 @@ end
 #aliases are still remaining
 
 # Path settings (Fish uses a different syntax for PATH)
-fish_add_path /home/javierrsantoss/.local/bin
-fish_add_path /home/javierrsantoss/go/bin
+fish_add_path /home/santos-404/.local/bin
+fish_add_path /home/santos-404/go/bin
 fish_add_path /usr/local/go/bin
 fish_add_path $HOME/.local/share/jdtls/bin
 
@@ -43,16 +43,10 @@ alias ll='ls -la'
 alias gs='git status'
 alias gd='git diff'
 
-alias uni='cd ~/javie/uni/4'
 alias downloads='cd ~/Downloads'
 
 alias prog='cd ~/prog'
 alias py='cd ~/prog/python'
-alias fakecount='cd ~/prog/projects/fakecount'
-alias fot='cd ~/prog/projects/friends-on-tour'
-alias tfg='cd ~/javie/uni/4/tfg'
-alias infantem='cd ~/prog/projects/infantem'
-alias mcp='cd ~/prog/projects/mcp-servers'
 
 alias pd='~/copy_token.sh'
 alias mariadb_pd='~/copy_mariadb_root.sh'
@@ -62,19 +56,12 @@ alias mysql_root='sudo mysql -u root -p'
 
 alias fishrc='nvim ~/.config/fish/config.fish'
 
-alias mvnwrun='./mvnw spring-boot:run'
-alias mvnwclean='./mvnw clean install'
-
 alias runserver='python ./manage.py runserver'
 alias migrate='python ./manage.py migrate'
 alias makemigrations='python ./manage.py makemigrations'
 alias djangoshell='python ./manage.py shell'
 alias rmigrations='find . -path "*/migrations/*.py" -not -name "__init__.py" -delete; find . -path "*/migrations/*.pyc"  -delete'
 alias fakecount_venv='source ./../.venv/bin/activate'
-
-alias umlet='java -jar ~/javie/Umlet/umlet.jar'
-alias knime='~/Downloads/knime_5.4.1/knime'
-alias cursor='~/Downloads/Cursor-0.47.9-x86_64.AppImage'
 
 alias pinga='ping -c 1 8.8.8.8'
 
@@ -92,3 +79,4 @@ export VISUAL=nvim
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+export PATH="$HOME/.local/bin:$PATH"

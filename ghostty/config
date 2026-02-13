@@ -9,8 +9,8 @@ background-opacity = 1
 # background-blur-radius = 80 # Not supported on GNOME yet
 window-save-state = always
 #max is 31
-window-height = 60
-window-width = 200
+# window-height = 60
+# window-width = 200
 # window-position-y = 20
 # window-position-x = 20
 window-padding-balance = true
@@ -21,7 +21,7 @@ mouse-hide-while-typing = true
 gtk-titlebar = false
 
 # 🖋 Font
-font-size = 20
+font-size = 15
 font-thicken = true
 # adjust-cell-height = 30%
 
@@ -71,7 +71,9 @@ theme = Chalk
 bold-is-bright = true
 
 # background = #303030
-background = #181818
+# background = #181818
+background = #000000
+
 # foreground = #ffffff
 # selection-background = #4e6a78
 # selection-foreground = #ffffff
