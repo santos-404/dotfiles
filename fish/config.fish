@@ -1,7 +1,7 @@
 ## Tmux auto-start with neofetch
 if test -z "$TMUX"
     # Launch tmux with neofetch as the initial command
-    exec tmux new-session "fastfetch; fish" 
+    tmux new-session "fastfetch; fish" 
 end
 
 #aliases are still remaining
@@ -82,3 +82,7 @@ export VISUAL=nvim
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+fish_add_path /home/santos-404/.opencode/bin
+set -gx PATH $HOME/flutter/bin $PATH
