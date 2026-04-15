@@ -1,9 +1,3 @@
-## Tmux auto-start with neofetch
-if test -z "$TMUX"
-    # Launch tmux with neofetch as the initial command
-    tmux new-session "fastfetch; fish" 
-end
-
 #aliases are still remaining
 
 # Path settings (Fish uses a different syntax for PATH)
