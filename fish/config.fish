@@ -51,7 +51,7 @@ alias py='cd ~/prog/python'
 alias pd='~/copy_token.sh'
 alias mariadb_pd='~/copy_mariadb_root.sh'
 
-alias venv='source ./venv/bin/activate.fish'
+alias venv='source ./.venv/bin/activate.fish'
 alias mysql_root='sudo mysql -u root -p'
 
 alias fishrc='nvim ~/.config/fish/config.fish'
@@ -76,7 +76,7 @@ alias mongo='cd ~/prog/mongo-sharded';
 
 export EDITOR=nvim
 export VISUAL=nvim
-
+export DOTNET_ROOT=/usr/share/dotnet
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
