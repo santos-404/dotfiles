@@ -21,17 +21,6 @@ set -U fish_color_host ff6c21         # Hostname in medium orange
 set -U fish_color_cwd ff4f00          # Current directory in main orange
 set -U fish_color_error ff2929        # Errors in red-orange
 
-
-set -U fish_greeting "
-                  _    ___  ____  
-  ___  __ _ _ __ | |_ / _ \/ ___| 
- / __|/ _` | '_ \| __| | | \___ \ 
- \__ \ (_| | | | | |_| |_| |___) |
- |___/\__,_|_| |_|\__|\___/|____/ 
-                                  
-"
-
-
 # aliases
 alias ll='ls -la'
 alias gs='git status'
