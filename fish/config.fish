@@ -50,12 +50,12 @@ alias fakecount_venv='source ./../.venv/bin/activate'
 
 alias pinga='ping -c 1 8.8.8.8'
 
-alias zen="~/Downloads/zen-x86_64.AppImage"
 alias vim="nvim"
+alias lg="lazygit"
 
 alias initlua="cd ~/.config/nvim";
 alias tkill='tmux kill-session -t';
-alias mongo='cd ~/prog/mongo-sharded';
+
 
 export EDITOR=nvim
 export VISUAL=nvim
