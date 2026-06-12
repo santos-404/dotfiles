@@ -25,6 +25,7 @@ set -U fish_color_error ff2929        # Errors in red-orange
 alias ll='ls -la'
 alias gs='git status'
 alias gd='git diff'
+alias lg="lazygit"
 
 alias downloads='cd ~/Downloads'
 
@@ -51,11 +52,12 @@ alias fakecount_venv='source ./../.venv/bin/activate'
 alias pinga='ping -c 1 8.8.8.8'
 
 alias vim="nvim"
-alias lg="lazygit"
 
-alias initlua="cd ~/.config/nvim";
-alias tkill='tmux kill-session -t';
+alias initlua="cd ~/.config/nvim"
+alias tkill='tmux kill-session -t'
 
+alias oc='opencode'
+alias cc='cluade'
 
 export EDITOR=nvim
 export VISUAL=nvim
