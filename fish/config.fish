@@ -39,7 +39,7 @@ alias venv='source ./.venv/bin/activate.fish'
 alias mysql_root='sudo mysql -u root -p'
 
 alias fishrc='nvim ~/.config/fish/config.fish'
-alias source_fish='source $HOME/.config/fish/config.fish'
+alias sourcefish='source $HOME/.config/fish/config.fish'
 alias dotfiles='cd $HOME/dotfiles'
 
 alias runserver='python ./manage.py runserver'
@@ -57,7 +57,7 @@ alias initlua="cd ~/.config/nvim"
 alias tkill='tmux kill-session -t'
 
 alias oc='opencode'
-alias cc='cluade'
+alias cc='claude'
 
 export EDITOR=nvim
 export VISUAL=nvim
