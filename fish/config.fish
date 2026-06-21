@@ -1,4 +1,4 @@
-#aliases are still remaining
+set -U fish_greeting
 
 # Path settings (Fish uses a different syntax for PATH)
 fish_add_path /home/santos-404/.local/bin
@@ -71,3 +71,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # opencode
 fish_add_path /home/santos-404/.opencode/bin
 set -gx PATH $HOME/flutter/bin $PATH
+
+# nvidia-smi
+export PATH="/usr/lib/wsl/lib:$PATH"
