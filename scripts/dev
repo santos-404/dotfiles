@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+current_dir="$(pwd)"
+
+if [ -z "${TMUX:-}" ]; then
+    printf 'dev must be run inside a tmux session\n' >&2
+    exit 1
+fi
+
+vim_window="$(tmux display-message -p '#{window_id}')"
+tmux rename-window -t "$vim_window" vim
+
+term_window="$(tmux new-window -P -F '#{window_id}' -c "$current_dir" -n term)"
+tmux split-window -t "$term_window" -h -c "$current_dir"
+tmux select-layout -t "$term_window" even-horizontal >/dev/null
+
+ai_window="$(tmux new-window -P -F '#{window_id}' -c "$current_dir" -n ai)"
+tmux send-keys -t "$ai_window" opencode Enter
+
+git_window="$(tmux new-window -P -F '#{window_id}' -c "$current_dir" -n git)"
+tmux send-keys -t "$git_window" lazygit Enter
+
+tmux select-window -t "$vim_window"
+nvim

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Remove all symlinks created by install.sh
 
+DOTS="$(cd "$(dirname "$0")" && pwd)"
+
 TARGETS=(
     "$HOME/.tmux.conf"
     "$HOME/.tmux/local.conf"
@@ -17,6 +19,16 @@ TARGETS=(
 )
 
 for target in "${TARGETS[@]}"; do
+    if [ -L "$target" ]; then
+        rm "$target"
+        echo "removed $target"
+    fi
+done
+
+for script in "$DOTS"/scripts/*; do
+    [ -f "$script" ] || continue
+    target="$HOME/.local/bin/$(basename "$script")"
+
     if [ -L "$target" ]; then
         rm "$target"
         echo "removed $target"
