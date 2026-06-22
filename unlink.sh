@@ -10,6 +10,7 @@ TARGETS=(
     "$HOME/.config/fish/config.fish"
     "$HOME/.config/ghostty/config"
     "$HOME/.config/fastfetch/config.jsonc"
+    "$HOME/.config/opencode/opencode.jsonc"
     "$HOME/.config/waybar/config.jsonc"
     "$HOME/.config/waybar/style.css"
     "$HOME/.config/waybar/scripts/wttr.py"
