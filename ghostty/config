@@ -8,20 +8,19 @@ shell-integration = fish
 background-opacity = 1
 # background-blur-radius = 80 # Not supported on GNOME yet
 window-save-state = always
-#max is 31
-window-height = 100
+window-height = 200
 window-width = 300
-# window-position-y = 20
-# window-position-x = 20
 window-padding-balance = true
 window-padding-x = 10
 mouse-scroll-multiplier = 1.5
 mouse-hide-while-typing = true
-# window-decoration = none 
+# macos-titlebar-style=hidden
 gtk-titlebar = false
 
+macos-option-as-alt = left 
+
 # 🖋 Font
-font-size = 13
+font-size = 14
 font-thicken = true
 # adjust-cell-height = 30%
 
