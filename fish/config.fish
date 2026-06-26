@@ -61,7 +61,10 @@ alias cc='claude'
 
 export EDITOR=nvim
 export VISUAL=nvim
+
+# dotnet
 export DOTNET_ROOT=/usr/share/dotnet
+set -gx DOTNET_SYSTEM_NET_SECURITY_USENETWORKFRAMEWORK 1  # dotnet uses tls1.2 by default in mac, this let you use tls1.3, needed to access self-hosted repository through cloudflare
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
@@ -74,3 +77,11 @@ set -gx PATH $HOME/flutter/bin $PATH
 
 # nvidia-smi
 export PATH="/usr/lib/wsl/lib:$PATH"
+
+# opencode
+fish_add_path /Users/santos/.opencode/bin
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/santos/.lmstudio/bin
+# End of LM Studio CLI section
+
