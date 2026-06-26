@@ -4,5 +4,24 @@
         "read": "allow",
         "edit": "ask"
     },
-    "default_agent": "plan"
+    "default_agent": "plan",
+
+    "provider": {
+        "local": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Local",
+            "options": {
+                "baseURL": "http://localhost:1234/v1",
+                "apiKey": "sk-local"
+            },
+            "models": {
+                "google/gemma-4-26b-a4b-qat": {
+                    "name": "Gemma 4 26B Local"
+                },
+                "qwen3.6-35b-a3b-uncensored-hauhaucs-aggressive": {
+                    "name": "Qwen 3.6 35B Local"
+                }
+            }
+        }
+    }
 }
