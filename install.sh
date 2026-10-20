@@ -1,37 +1,62 @@
 #!/usr/bin/env bash
+# Link configs without discarding existing files. No packages or sudo required.
+set -euo pipefail
 DOTS="$(cd "$(dirname "$0")" && pwd)"
-TMUX_RESURRECT_DIR="$HOME/.tmux/plugins/tmux-resurrect"
+CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+BACKUP_DIR="$CONFIG_HOME/dotfiles/backups/$(date +%Y%m%d-%H%M%S)-$$"
+SKIP_PLUGINS=false
+case "${1:-}" in
+    --skip-plugins) SKIP_PLUGINS=true ;;
+    '') ;;
+    *) echo "Usage: bash install.sh [--skip-plugins]" >&2; exit 1 ;;
+esac
 
 link() {
-    mkdir -p "$(dirname "$2")"
-    ln -sf "$1" "$2"
-    echo "$2 -> $1"
+    local source="$1" target="$2" backup
+    mkdir -p "$(dirname "$target")"
+    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+        return
+    fi
+    if [ -e "$target" ] || [ -L "$target" ]; then
+        backup="$BACKUP_DIR/${target#"$HOME"/}"
+        mkdir -p "$(dirname "$backup")"
+        mv "$target" "$backup"
+        echo "Backed up $target to $backup"
+    fi
+    ln -s "$source" "$target"
+    echo "$target -> $source"
 }
 
 install_tmux_resurrect() {
-    if [ -d "$TMUX_RESURRECT_DIR/.git" ]; then
-        echo "$TMUX_RESURRECT_DIR already installed"
-        return
-    fi
-
-    if [ -e "$TMUX_RESURRECT_DIR" ]; then
-        echo "error: $TMUX_RESURRECT_DIR exists but is not a git checkout" >&2
+    local plugin="$HOME/.tmux/plugins/tmux-resurrect"
+    if [ -d "$plugin/.git" ]; then
+        echo "$plugin already installed"
+    elif [ -e "$plugin" ]; then
+        echo "error: $plugin exists but is not a git checkout" >&2
         return 1
+    else
+        mkdir -p "$(dirname "$plugin")"
+        git clone --depth 1 https://github.com/tmux-plugins/tmux-resurrect "$plugin"
     fi
-
-    mkdir -p "$(dirname "$TMUX_RESURRECT_DIR")"
-    git clone https://github.com/tmux-plugins/tmux-resurrect "$TMUX_RESURRECT_DIR"
 }
 
-link "$DOTS/tmux/tmux.conf"            "$HOME/.config/tmux/tmux.conf"
-link "$DOTS/fish/config.fish"         "$HOME/.config/fish/config.fish"
-link "$DOTS/ghostty/config"           "$HOME/.config/ghostty/config"
-link "$DOTS/fastfetch/config.jsonc"   "$HOME/.config/fastfetch/config.jsonc"
-link "$DOTS/opencode/opencode.jsonc"  "$HOME/.config/opencode/opencode.jsonc"
+case "$(uname -s)" in
+    Darwin) platform=macos ;;
+    Linux) platform=linux ;;
+    *) echo "Unsupported platform: $(uname -s)" >&2; exit 1 ;;
+esac
+
+for config in tmux/tmux.conf fish/config.fish ghostty/config fastfetch/config.jsonc opencode/opencode.jsonc; do
+    link "$DOTS/$config" "$CONFIG_HOME/$config"
+done
+link "$DOTS/ghostty/config.$platform" "$CONFIG_HOME/ghostty/config.platform"
 
 for script in "$DOTS"/scripts/*; do
     [ -f "$script" ] || continue
     link "$script" "$HOME/.local/bin/$(basename "$script")"
 done
 
-install_tmux_resurrect
+if ! "$SKIP_PLUGINS"; then
+    install_tmux_resurrect
+fi
+printf '\nConfigs linked. Restart Fish and reload Ghostty/tmux to apply changes.\n'

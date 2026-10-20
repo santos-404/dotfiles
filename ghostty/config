@@ -5,23 +5,18 @@
 shell-integration = fish
 
 # 🪟 Window
-background-opacity = 1
-# background-blur-radius = 80 # Not supported on GNOME yet
-window-save-state = always
-window-height = 200
-window-width = 300
+background-opacity = 0.9
+background-blur = true
+window-height = 45
+window-width = 163
 window-padding-balance = true
 window-padding-x = 10
 mouse-scroll-multiplier = 1.5
 mouse-hide-while-typing = true
 # macos-titlebar-style=hidden
-gtk-titlebar = false
-
-macos-option-as-alt = left 
 
 # 🖋 Font
 font-size = 14
-font-thicken = true
 # adjust-cell-height = 30%
 
 # 📋 Clipboard
@@ -38,7 +33,6 @@ adjust-cursor-thickness = 50%
 cursor-color = #5cf19e
 
 # 🥖 Quick Terminal
-keybind = global:ctrl+alt+s=toggle_quick_terminal
 quick-terminal-position = bottom
 quick-terminal-animation-duration = 0.06
 quick-terminal-autohide = true
@@ -66,12 +60,12 @@ keybind = ctrl+shift+i=write_scrollback_file:paste
 # Based on the `MaterialDesignColors`
 # Palette based on the `Material Design Colors`
 
-theme = Chalk
+theme = 0x96f
 bold-is-bright = true
 
 # background = #303030
 # background = #181818
-background = #000000
+# background = #000000
 
 # foreground = #ffffff
 # selection-background = #4e6a78
@@ -104,4 +98,9 @@ keybind = alt+six=unbind
 keybind = alt+seven=unbind
 keybind = alt+eight=unbind
 keybind = alt+nine=unbind
+
+# install.sh selects config.macos or config.linux for this machine.
+config-file = ?config.platform
+# Optional local overrides (not managed by this repository).
+config-file = ?config.local
 

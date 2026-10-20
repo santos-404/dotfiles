@@ -1,14 +1,48 @@
 set -U fish_greeting
 
-# Path settings (Fish uses a different syntax for PATH)
-fish_add_path /home/santos-404/.local/bin
-fish_add_path /home/santos-404/go/bin
-fish_add_path /usr/local/go/bin
-fish_add_path $HOME/.local/share/jdtls/bin
+# Add only installed tools, using this machine's home directory.
+for dir in $HOME/.local/bin $HOME/go/bin /usr/local/go/bin \
+        $HOME/.local/opt/go/bin $HOME/.local/share/jdtls/bin \
+        $HOME/.bun/bin $HOME/.opencode/bin $HOME/flutter/bin $HOME/.lmstudio/bin
+    if test -d "$dir"
+        fish_add_path --path "$dir"
+    end
+end
 
-# Set up fzf (Ctrl+R functionality)
-if test -f /usr/share/fzf/shell/key-bindings.fish
-    source /usr/share/fzf/shell/key-bindings.fish
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+set -gx BUN_INSTALL "$HOME/.bun"
+
+if test (uname) = Darwin
+    for dir in /opt/homebrew/bin /opt/homebrew/sbin /opt/homebrew/opt/libpq/bin \
+            /opt/homebrew/opt/postgresql@18/bin \
+            $HOME/.cs2kit/engines/sikarugir-10/wswine.bundle/bin
+        if test -d "$dir"
+            fish_add_path --path "$dir"
+        end
+    end
+    # macOS .NET TLS backend, needed for the local development setup.
+    set -gx DOTNET_SYSTEM_NET_SECURITY_USENETWORKFRAMEWORK 1
+else if test -d /usr/share/dotnet
+    set -gx DOTNET_ROOT /usr/share/dotnet
+end
+
+# Private endpoints, credentials and machine-specific overrides stay outside Git.
+if test -f "$__fish_config_dir/config.local.fish"
+    source "$__fish_config_dir/config.local.fish"
+end
+
+# Interactive integrations should not run in scripts or remote command shells.
+if not status is-interactive
+    return
+end
+
+if command -q fzf
+    if fzf --fish >/dev/null 2>&1
+        fzf --fish | source
+    else if test -f /usr/share/fzf/shell/key-bindings.fish
+        source /usr/share/fzf/shell/key-bindings.fish
+    end
 end
 
 # NVM settings for Fish (requires additional plugin)
@@ -47,8 +81,7 @@ alias migrate='python ./manage.py migrate'
 alias makemigrations='python ./manage.py makemigrations'
 alias djangoshell='python ./manage.py shell'
 alias rmigrations='find . -path "*/migrations/*.py" -not -name "__init__.py" -delete; find . -path "*/migrations/*.pyc"  -delete'
-alias fakecount_venv='source ./../.venv/bin/activate'
-
+alias fakecount_venv='source ./../.venv/bin/activate.fish'
 alias pinga='ping -c 1 8.8.8.8'
 
 alias vim="nvim"
@@ -59,29 +92,17 @@ alias tkill='tmux kill-session -t'
 alias oc='opencode'
 alias cc='claude'
 
-export EDITOR=nvim
-export VISUAL=nvim
+if test (uname) = Darwin
+    alias battery='pmset -g batt'
+    alias investments='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/investments'
+end
 
-# dotnet
-export DOTNET_ROOT=/usr/share/dotnet
-set -gx DOTNET_SYSTEM_NET_SECURITY_USENETWORKFRAMEWORK 1  # dotnet uses tls1.2 by default in mac, this let you use tls1.3, needed to access self-hosted repository through cloudflare
+# Optional, machine-local envman installation.
+if test -s "$HOME/.config/envman/load.fish"
+    source "$HOME/.config/envman/load.fish"
+end
 
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-export PATH="$HOME/.local/bin:$PATH"
-
-# opencode
-fish_add_path /home/santos-404/.opencode/bin
-set -gx PATH $HOME/flutter/bin $PATH
-
-# nvidia-smi
-export PATH="/usr/lib/wsl/lib:$PATH"
-
-# opencode
-fish_add_path /Users/santos/.opencode/bin
-
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/santos/.lmstudio/bin
-# End of LM Studio CLI section
-
+if command -q zoxide
+    zoxide init fish | source
+    alias cd='z'
+end

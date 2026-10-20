@@ -1,0 +1,5 @@
+# Keep the existing Mac shortcut and rendering preferences.
+font-thicken = true
+macos-option-as-alt = left
+window-save-state = always
+keybind = global:cmd+ctrl+t=toggle_quick_terminal
